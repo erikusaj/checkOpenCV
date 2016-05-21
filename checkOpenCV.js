@@ -35,7 +35,7 @@ exec('npm -version', (error, stdout, stderr) => {
         return;
       }
       else {
-        console.log( 'Npm:' + npmversion + ' ; ' + stdout.split('\n')[0] );
+        console.log( 'Npm: ' + npmversion + ' ; ' + stdout.split('\n')[0] );
       }
     });
 
@@ -82,3 +82,14 @@ else {
     }
   });
 }
+
+exec('pkg-config --version', (error, stdout, stderr) => {
+  if (error) {
+    console.error('ERROR: missing pgk-config');
+    console.error('POSSIBLE FIX: install it using: \n sudo apt-get install -y pkg-config \n or \n sudo yum install -y pkg-config \n or \n brew install pkg-config');
+    return;
+  }
+  else {
+    console.log( 'pgk-config: '.concat( stdout.split('\n')[0] ));
+  }
+});
