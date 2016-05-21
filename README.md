@@ -46,9 +46,9 @@ I ~~am~~ __was__ observing issues 😱 installing Npm module _opencv_ Node Bindi
 Therefore I've written this script to try pinpoint what was causing issues.
 
 I think it might be handy to identify what is installed on those virtual machines since many authors don't care providing some basic _documentation_.
-Yeah, since we are all prone to forget RTFM ;-)
+Yeah, since we are all prone to forget RTFM 📖 😏
 
 ### Known issues
-- no Windows support
+- Sorry, no Windows support.
 - search requires sudo on Linux
 - ...
