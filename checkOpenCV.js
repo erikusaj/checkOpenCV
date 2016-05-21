@@ -116,12 +116,11 @@ function checkEnvironment(path){
   exec('env | grep PKG_CONFIG_PATH', (error, stdout, stderr) => {
     if (error) {
       console.log( [
-        'IMPORTANT: make sure to add paths:\n\n',
-        'PKG_CONFIG_PATH=$PKG_CONFIG_PATH:', '\n',
-        'export PKG_CONFIG_PATH\n' ].join('')
+        'Checking for environment variable PKG_CONFIG_PATH failed.\n',
+        'IMPORTANT: make sure to add enironment paths:\n\n',
+        '  PKG_CONFIG_PATH=$PKG_CONFIG_PATH:', path, '\n',
+        '  export PKG_CONFIG_PATH\n' ].join('')
       );
-      console.log('Checking for environment variable PKG_CONFIG_PATH failed:\n\n  ' );
-
     }
     else {
       var ok = stdout.includes(path)?'OK':'NOT OK';
@@ -133,9 +132,9 @@ function checkEnvironment(path){
       else
       {
         console.log( [
-          'IMPORTANT: make sure to add paths:\n\n',
-          'PKG_CONFIG_PATH=$PKG_CONFIG_PATH:', path, '\n',
-          'export PKG_CONFIG_PATH\n' ].join('')
+          'IMPORTANT: make sure to add enironment paths:\n\n',
+          '  PKG_CONFIG_PATH=$PKG_CONFIG_PATH:', path, '\n',
+          '  xport PKG_CONFIG_PATH\n' ].join('')
         );
       }
     }
