@@ -53,7 +53,6 @@ if ( os.platform() == 'win32' )
   console.error('TODO: Improvement: Checking OpenCV on Windows.');
 }
 else {
-  console.log(findcommand);
   exec(findcommand, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
