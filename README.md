@@ -9,8 +9,7 @@ $ node checkOpenCV.js
 
 ### Sample outputs
 
-This should be fine. You should be able to `npm install opencv -g` on your machine.
-
+**example 1:** This should be fine:
 ```
 Linux ; linux ; x64 ; 3.10.0-327.13.1.el7.x86_64 ; 1929408512 ; 1126473728
 OpenCV ; 2.4.12 ; /usr/local/opencv/lib/pkgconfig/opencv.pc
@@ -21,8 +20,9 @@ pgk-config: 0.27.1
 Node: v4.3.2
 Npm: 2.14.12 ; /home/vagrant/.npm-global
 ```
+You should be able to `npm install opencv -g` on your machine.
 
-This requires some work using.
+**example 2:** This requires some work using.
 
 ```
 Darwin ; darwin ; x64 ; 15.4.0 ; 4294967296 ; 21180416
@@ -41,9 +41,9 @@ Npm: 3.9.2 ; /usr/local
 Update your .bash_profile with your favorite editor. `atom $HOME/.bash_profile`.
 Then restart your Terminal and retry installing.
 
-### Note
-I am observing issues installing Npm module _opencv_ Node Bindings to OpenCV from [npm opencv ](https://www.npmjs.com/package/opencv) on several Vagrant boxes and Docker containers.
-Therefore creating this script to try identify pinpoint issues.
+### Notes
+I ~~am~~ __was__ observing issues 😱 installing Npm module _opencv_ Node Bindings to OpenCV from [npm opencv ](https://www.npmjs.com/package/opencv) on several Vagrant boxes and Docker containers.
+Therefore I've written this script to try pinpoint what was causing issues.
 
 I think it might be handy to identify what is installed on those virtual machines since many authors don't care providing some basic _documentation_.
 Yeah, since we are all prone to forget RTFM ;-)
