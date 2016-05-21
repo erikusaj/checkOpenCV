@@ -4,67 +4,67 @@
 //
 
 "use strict";
+var os = require('os');
+var exec = require("child_process").exec;
+var fs = require("fs");
 
+var configPath = '';
 
-  var os = require('os');
-  var exec = require("child_process").exec;
-  var fs = require("fs");
+checkOS();
 
-  var configPath = '';
-  const line = '------------------------------------------';
+// printout some OS info
+function checkOS(){
+  console.log(
+    '\nOS: '.concat(
+      [ os.type(),
+        os.platform(),
+        os.arch(),
+        os.release(),
+        os.totalmem(),
+        os.freemem()
+      ].join(' ; ')
+    )
+  );
+  checkLibrary();
+}
 
+// check for Node version
+function checkNode(){
+  exec('node --version', (error, stdout, stderr) => {
+    if (error) {
+      console.log( 'Node check failed:\n\n  '.concat(error) );
+      return;
+    }
+    else {
+      console.log( 'Node: '.concat( stdout.split('\n')[0] ));
+    }
+    checkNpm();
+  });
+}
 
-  checkOS();
+// check for Npm version
+function checkNpm(){
+  exec('npm -version', (error, stdout, stderr) => {
+    if (error) {
+      console.log( 'Npm check failed:\n\n  '.concat(error) );
+      return;
+    }
+    else {
+      var npmversion = stdout.split('\n')[0];
+      exec('npm config get prefix', (error, stdout, stderr) => {
+        if (error) {
+          console.log( 'Check failed.\n'.concat(error) );
+          return;
+        }
+        else {
+          console.log( 'Npm: ' + npmversion + ' ; ' + stdout.split('\n')[0] );
+        }
+      });
+    }
+  });
+}
 
-  function checkOS(){
-    console.log(
-      '\n'.concat(
-        [ os.type(),
-          os.platform(),
-          os.arch(),
-          os.release(),
-          os.totalmem(),
-          os.freemem()
-        ].join(' ; ')
-      )
-    );
-    checkLibrary();
-  }
-
-  function checkNode(){
-    exec('node --version', (error, stdout, stderr) => {
-      if (error) {
-        console.log( 'Node check failed:\n\n  '.concat(error) );
-        return;
-      }
-      else {
-        console.log( 'Node: '.concat( stdout.split('\n')[0] ));
-      }
-      checkNpm();
-    });
-  }
-
-  function checkNpm(){
-    exec('npm -version', (error, stdout, stderr) => {
-      if (error) {
-        console.log( 'Npm check failed:\n\n  '.concat(error) );
-        return;
-      }
-      else {
-        var npmversion = stdout.split('\n')[0];
-        exec('npm config get prefix', (error, stdout, stderr) => {
-          if (error) {
-            console.log( 'Check failed.\n'.concat(error) );
-            return;
-          }
-          else {
-            console.log( 'Npm: ' + npmversion + ' ; ' + stdout.split('\n')[0] );
-          }
-        });
-      }
-    });
-  }
-
+// check for OpenCV library
 function checkLibrary(){
   var findcommand = 'sudo find / -name "opencv.pc" -type f';
   if ( os.platform() == "darwin" ) {
@@ -98,7 +98,7 @@ function checkLibrary(){
                   var ls = lines[l].split(':');
                   if ( ls[0].trim().toLowerCase() == 'version' )
                   {
-                    console.log( ['OpenCV',  ls[1].trim(), filename].join(' ; ') );
+                    console.log( 'OpenCV: '.concat( [ ls[1].trim(), filename ].join(' ; ') ) );
                     configPath = filename.substring( 0, filename.lastIndexOf('/') )
                   }
                 }
@@ -111,7 +111,7 @@ function checkLibrary(){
   }
 }
 
-
+// check for environment variable PKG_CONFIG_PATH
 function checkEnvironment(path){
   exec('env | grep PKG_CONFIG_PATH', (error, stdout, stderr) => {
     if (error) {
@@ -143,7 +143,7 @@ function checkEnvironment(path){
 };
 
 
-
+// check for pkg-config
 function checkPkgConfig()
 {
   const pkgPlatformFix = {
