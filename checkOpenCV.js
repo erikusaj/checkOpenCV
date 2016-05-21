@@ -81,12 +81,16 @@ else {
       }
     }
   });
+};
+
+const pkgPlatformFix = {
+  'darwin' : 'brew install pgk-config',
+  'linux' : 'sudo apt-get install -y pkg-config \n or \nsudo yum install -y pkg-config'
 }
 
 exec('pkg-config --version', (error, stdout, stderr) => {
   if (error) {
-    console.error('ERROR: missing pgk-config');
-    console.error('POSSIBLE FIX: install it using: \n sudo apt-get install -y pkg-config \n or \n sudo yum install -y pkg-config \n or \n brew install pkg-config');
+    console.log('pgk-config: is missing\nPOSSIBLE FIX: install utility using:\n'.concat( pkg.pkgPlatformFix[os.platform()] ));
     return;
   }
   else {
