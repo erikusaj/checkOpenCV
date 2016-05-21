@@ -42,12 +42,19 @@ exec('npm -version', (error, stdout, stderr) => {
   }
 });
 
+var findcommand = 'sudo find / -name "opencv.pc" -type f';
+
+if ( os.platform() == "darwin" ) {
+  findcommand = "mdfind -name opencv.pc";
+}
+
 if ( os.platform() == 'win32' )
 {
   console.error('TODO: Improvement: Checking OpenCV on Windows.');
 }
 else {
-  exec('sudo find / -name "opencv.pc" -type f', (error, stdout, stderr) => {
+  console.log(findcommand);
+  exec(findcommand, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;
