@@ -1,0 +1,2 @@
+# checkOpenCV
+Check OpenCV version
